@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografía: Arquitectura de Software</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #333;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .infographic {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(to right, #2c3e50, #4ca1af);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .card {
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .card-header i {
+            font-size: 1.8rem;
+            margin-right: 15px;
+        }
+        
+        .card-header h2 {
+            font-size: 1.5rem;
+        }
+        
+        .card-content {
+            line-height: 1.6;
+        }
+        
+        .card-content p {
+            margin-bottom: 10px;
+        }
+        
+        .card-content ul {
+            list-style-type: none;
+            padding-left: 5px;
+        }
+        
+        .card-content li {
+            margin-bottom: 8px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .card-content li:before {
+            content: "•";
+            color: #4ca1af;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .timeline {
+            grid-column: 1 / -1;
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #2c3e50;
+            font-size: 1.8rem;
+        }
+        
+        .timeline-content {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin: 40px 0;
+        }
+        
+        .timeline-content:before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #4ca1af;
+            transform: translateY(-50%);
+        }
+        
+        .timeline-item {
+            text-align: center;
+            position: relative;
+            width: 30%;
+            z-index: 1;
+        }
+        
+        .timeline-point {
+            width: 30px;
+            height: 30px;
+            background: #4ca1af;
+            border: 4px solid white;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            box-shadow: 0 0 0 3px #4ca1af;
+        }
+        
+        .timeline-text {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline-text h3 {
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+        
+        .references {
+            grid-column: 1 / -1;
+            background: #2c3e50;
+            color: white;
+            border-radius: 10px;
+            padding: 25px;
+        }
+        
+        .references h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            color: #fdbb2d;
+        }
+        
+        .references-content {
+            column-count: 2;
+            column-gap: 30px;
+        }
+        
+        .references-content p {
+            margin-bottom: 15px;
+            break-inside: avoid;
+            font-size: 0.9rem;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #2c3e50;
+            color: white;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline-content {
+                flex-direction: column;
+            }
+            
+            .timeline-content:before {
+                top: 0;
+                bottom: 0;
+                left: 50%;
+                width: 4px;
+                height: 100%;
+                transform: translateX(-50%);
+            }
+            
+            .timeline-item {
+                width: 100%;
+                margin-bottom: 40px;
+                display: flex;
+                align-items: center;
+                text-align: left;
+            }
+            
+            .timeline-point {
+                margin: 0 20px 0 0;
+                flex-shrink: 0;
+            }
+            
+            .references-content {
+                column-count: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="infographic">
+            <header>
+                <h1>Arquitectura de Software</h1>
+                <p class="subtitle">Diseñando la estructura fundamental de aplicaciones robustas y escalables</p>
+            </header>
+            
+            <div class="content">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-drafting-compass"></i>
+                        <h2>¿Qué es?</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>La arquitectura de software es una disciplina que se encarga de la planificación y el diseño de una estructura a un nivel superior y abstracto, lo que implica la toma de decisiones antes de su realización.</p>
+                        <p>Función como una guía teórica detallada que permite entender cómo encajarán las distintas piezas de un producto o servicio.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-history"></i>
+                        <h2>Orígenes</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>El concepto surgió en los años 60, refiriéndose a una planificación basada en modelos, patrones y abstracciones teóricas para la creación de software de cierta complejidad.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-tasks"></i>
+                        <h2>Importancia</h2>
+                    </div>
+                    <div class="card-content">
+                        <ul>
+                            <li>Fase de planificación crítica antes de la programación</li>
+                            <li>Determina el ritmo del desarrollo y factores económicos</li>
+                            <li>Permite seleccionar el conjunto de herramientas más adecuado</li>
+                            <li>Estructura fundamental para aplicaciones adaptables y escalables</li>
+                            <li>Asegura robustez ante cambios y expansiones futuras</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-puzzle-piece"></i>
+                        <h2>Patrones de Arquitectura</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Un patrón se define como una solución general y reutilizable para problemas recurrentes en la ingeniería de software, orientada específicamente a la estructura a un nivel superior.</p>
+                        <p>Los patrones son más genéricos que los patrones de programación y proporcionan esquemas organizativos fundamentales.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-shield-alt"></i>
+                        <h2>Seguridad en el Diseño</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Las decisiones de diseño incorrectas en la etapa de arquitectura pueden introducir vulnerabilidades en el sistema.</p>
+                        <p>Aplicar principios de diseño seguro ayuda a prevenir este tipo de fallos y minimiza la necesidad de modificar el código en etapas posteriores.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-user-tie"></i>
+                        <h2>Rol del Analista</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Un buen analista de software invertirá tiempo considerable en esta etapa, lo que acelerará el desarrollo y evitará problemas futuros difíciles de resolver.</p>
+                        <p>Esta inversión inicial en planificación ahorra tiempo y recursos a largo plazo.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline">
+                    <h2>Evolución de la Arquitectura de Software</h2>
+                    <div class="timeline-content">
+                        <div class="timeline-item">
+                            <div class="timeline-point"></div>
+                            <div class="timeline-text">
+                                <h3>Años 60</h3>
+                                <p>Surgimiento del concepto de arquitectura de software con enfoque en modelos y abstracciones teóricas.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-point"></div>
+                            <div class="timeline-text">
+                                <h3>Años 90</h3>
+                                <p>Popularización de patrones de diseño y metodologías formales de arquitectura.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-point"></div>
+                            <div class="timeline-text">
+                                <h3>Actualidad</h3>
+                                <p>Enfoque en arquitecturas escalables, seguras y adaptables para entornos cloud y móviles.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="references">
+                    <h2>Referencias</h2>
+                    <div class="references-content">
+                        <p>Alboka Soft. (2025). Los desafíos en el desarrollo de software.</p>
+                        <p>Autor no identificado. (n.d.). Sistemas expertos y sus aplicaciones. Universidad Autónoma del Estado de Hidalgo (UAEH).</p>
+                        <p>Autor no identificado. (n.d.). Unidad I: Fundamentos de Ingeniería de Software. Instituto Tecnológico de Pachuca (ITPN).</p>
+                        <p>Cendejas Valdéz, J. L. (n.d.). Modelos y metodologías para el desarrollo de software. Eumed.net.</p>
+                        <p>DesarrolloWeb.com. (n.d.). Cómo NO convertirse en un desarrollador de software según Martin Fowler [Video]. YouTube.</p>
+                        <p>Huet, P. (2022, 24 de agosto). Arquitectura de software: Qué es y qué tipos existen. OpenWebinars.</p>
+                        <p>López Lio, R., Bellezza, B., & Erra, F. (2021, agosto). Guía introductoria a la Seguridad para el Desarrollo de Aplicaciones WEB. Portal Gobierno de Catamarca.</p>
+                        <p>To Grow Agencia. (2024). Los Principios Básicos del Desarrollo de Software y su Impacto en la Tecnología.</p>
+                        <p>Wikipedia contributors. (n.d.). Ingeniería de software. Wikipedia, la enciclopedia libre.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <footer>
+                <p>Infografía sobre Arquitectura de Software - Basada en el documento proporcionado</p>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
